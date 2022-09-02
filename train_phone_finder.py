@@ -5,7 +5,6 @@ from sklearn.model_selection import train_test_split
 import numpy as np
 from tensorflow.keras.layers import Conv2D, Dense, Input, Flatten, MaxPool2D, Dropout, BatchNormalization
 from tensorflow.keras import Model
-from tensorflow.keras.applications import vgg16
 from tensorflow.keras.optimizers import Adam, RMSprop
 from tensorflow.keras.callbacks import ReduceLROnPlateau, EarlyStopping
 from tensorflow.keras.regularizers import L2
@@ -47,7 +46,7 @@ def getAccuracy(model, x, y):
   diff = np.abs(y_pred - y)
   correct = 0
   for pair in diff:
-    if(pair[0] <= 0.05 and pair[1] <= 0.05):
+    if(np.sqrt(pair[0]**2 + pair[1]**2) <= 0.05):
       correct += 1
   return correct / len(y)
 
@@ -109,10 +108,12 @@ model.compile(optimizer=optimizer, loss=tf.losses.MeanSquaredError(),metrics=['m
 model.summary()
 
 reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=10, min_lr=0.000001) # Reduce the learning rate when it is plateau
-earlystop = EarlyStopping(monitor='val_loss', patience=20) # Early stop the training when there is no improvement
+earlystop = EarlyStopping(monitor='val_loss', patience=20, restore_best_weights=True) # Early stop the training when there is no improvement
 hist = model.fit(x_train,y_train,batch_size=batch_size,epochs=epochs,validation_data=(x_val, y_val), callbacks=[earlystop, reduce_lr])
 
 model.save("phone_detection.h5")
+
+# Create figures indicating loss during the training
 
 plt.plot(hist.history['loss'])
 plt.plot(hist.history['val_loss'])
@@ -126,6 +127,8 @@ plt.plot(hist.history['val_loss'])
 plt.legend(["Training", "Validation"])
 plt.title("MAE")
 plt.savefig('figures/mae.png', dpi=450, bbox_inches='tight')
+
+# Evaluate the model by using the training and validation dataset
 
 training_acc = getAccuracy(model, x_train, y_train)
 val_acc = getAccuracy(model, x_val, y_val)
