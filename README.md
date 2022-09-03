@@ -30,6 +30,9 @@ We use the Adam optimizer with the learning rate of 0.0001 and the batch size of
 
 ## Result
 
+![image](https://user-images.githubusercontent.com/23422272/188262494-89698811-b5f2-4241-9c73-7179834334d7.png)
+![image](https://user-images.githubusercontent.com/23422272/188262796-2ea17dd5-6c47-40e4-9369-7196d05f0031.png)
+
 ## References
 
 1) https://idiotdeveloper.com/vgg16-unet-implementation-in-tensorflow/
