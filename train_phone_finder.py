@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 
 optimizer = Adam(learning_rate=1e-4)
 batch_size = 10
-epochs = 2
+epochs = 1000
 coef_reg = 0.00001 # Coefficient for L2 regularizer of weights
 coef_bias_reg = 0 # Coefficient for L2 regularizer of biases
 act = 'relu' # Choice of activation functions (either relu or tanh)
