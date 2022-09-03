@@ -11,7 +11,12 @@ This repository mainly includes 4 files:
 
 ## Data
 
+We have 129 images as our dataset, each of which contains one phone. We splited this dataset into 104 training samples and 25 validation samples. Then, we scaled the images into 70% of its size so that its batches can fit our GPU, and the parameters of the model is significantly decreased. If you have a higher-performance GPU, you may not need to scale the images. 
+
 ## Model
+
+efdsgds
+![image](https://user-images.githubusercontent.com/23422272/188261241-12e52a7f-966e-4279-86bd-02de91110f6a.png)
 
 ## Training
 
