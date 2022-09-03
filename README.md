@@ -30,8 +30,12 @@ We use the Adam optimizer with the learning rate of 0.0001 and the batch size of
 
 ## Result
 
+According to the results during training below, the model start beinig overfitting the training samples after epoch 130 since the training loss is going down while the validation loss is already converge. Interestingly, despite the fact that the model is converge around epoch 130, according to the figure on the right, MAE starts being stable around epoch 90. 
+
 ![image](https://user-images.githubusercontent.com/23422272/188262494-89698811-b5f2-4241-9c73-7179834334d7.png)
 ![image](https://user-images.githubusercontent.com/23422272/188262796-2ea17dd5-6c47-40e4-9369-7196d05f0031.png)
+
+Additionally, we also evaluate the trained model by using the accuracy. Note that we consider the model can correctly predict the phone's location when the distance between the predicted location and the ground-truth location is less than 0.05. The accuracy on the training samples is 100%. This result is very good. However, we do not know if it is overfitting the training samples. Hence, we also measure the accuracy on the validation samples. The least accuracy on the validation samples that the model has achieved is around 61%, and the highest one is around 88%. That is, our model should pass the evaluation  critiria which only requires the model to achieve the accuracy of 50% on the unseen data and 70% on the training data. 
 
 ## References
 
