@@ -15,9 +15,15 @@ We have 129 images as our dataset, each of which contains one phone. We splited 
 
 ## Model
 
-efdsgds
+We use VGG-16 (shown below) as our architecture because it has a very good result on Image-net classification and is not very difficult to train. Therefore, we believe that it can extract features from an image very well and only change the last dense layer into two neurons (i.e., x and y coordinates).
+
 ![image](https://user-images.githubusercontent.com/23422272/188261241-12e52a7f-966e-4279-86bd-02de91110f6a.png)
+
 
 ## Training
 
 ## Result
+
+## References
+
+1) https://idiotdeveloper.com/vgg16-unet-implementation-in-tensorflow/
