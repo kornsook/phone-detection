@@ -15,12 +15,18 @@ We have 129 images as our dataset, each of which contains one phone. We splited 
 
 ## Model
 
-We use VGG-16 (shown below) as our architecture because it has a very good result on Image-net classification and is not very difficult to train. Therefore, we believe that it can extract features from an image very well and only change the last dense layer into two neurons (i.e., x and y coordinates).
+We use VGG-16 (shown below) as our architecture because it has a very good result on Image-net classification and is not very difficult to train. Therefore, we believe that it can extract features from an image very well and only have three dense layers including the output layer whose number of neurons is two (i.e., x and y coordinates).
 
 ![image](https://user-images.githubusercontent.com/23422272/188261241-12e52a7f-966e-4279-86bd-02de91110f6a.png)
 
 
 ## Training
+
+We use the Adam optimizer with the learning rate of 0.0001 and the batch size of 10. We also set up the number of epochs to 1000. However, it will never reach 1000. Furthermore, we apply the ReduceOnPlateau callback to reduce the learning rate when the optimizer cannot improve the validation loss and also the EarlyStopping callback to stop the training when it is converge with respect to the validation loss so that the model will not be overfitting the training samples. In addition, we apply other three regularization techniques as follows:
+
+1) Batchnormalization: Since VGG-16 is a deep network, we need to limit the values after some layers. We decide to place this batchnormalization layer after the last convolutional layer.
+2) Dropout: This technique is very popular to use for regulazation because it can avoid the model to strongly rely only on a few features by dropping some parameters out during the training. We placee this dropout layer after the second dense layer.
+3) L2 regularization: This is another popular technique to regularize the model because it will force the training to reduce the values of the parameters such that the model will not strongly rely on a few features. We also found that with the balancers of 0.01 and 0.001, the model is underfitting since it only focuses on minimizing the values of the parameters. Nonetheless, when we set the balancer to 0.00001, the model performs very well on both the training and validation samples. Therefore, we use this value for the training.
 
 ## Result
 
